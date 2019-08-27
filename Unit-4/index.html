@@ -43,8 +43,10 @@ button{
 		function rainbowHaiDooNoy(){
 			theNum = howManyRainbowStripsDoYouWantHeu.value;
 			rainbow.innerHTML = '';
-			for (var i = 0; i < theNum; i++) {
-				rainbow.innerHTML += `<div class="fuse" style="--hue:${i*(360/theNum)}"></div>`;
+			for (let i = 0; i < theNum; i++) {
+				setTimeout(function() {
+					rainbow.innerHTML += `<div class="fuse" style="--hue:${i*(360/theNum)}"></div>`;
+				}, 30*i);
 			}
 		}
 	</script>
