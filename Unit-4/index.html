@@ -37,6 +37,8 @@ button{
 <body>
 	<input type="number" id="howManyRainbowStripsDoYouWantHeu" min="0" max="999" value="6">
 	<button onclick="rainbowHaiDooNoy()">Go!</button>
+	<button onclick="playAnimationHaiDooNoy()">Play!</button>
+	<button onclick="stopAnimationHaiDooNoy()">Stop!</button>
 	<div id="rainbow">
 	</div>
 	<script type="text/javascript">
@@ -48,6 +50,27 @@ button{
 					rainbow.innerHTML += `<div class="fuse" style="--hue:${i*(360/theNum)}"></div>`;
 				}, 30*i);
 			}
+		}
+		function playAnimationHaiDooNoy() {
+			theFuse = document.querySelectorAll('.fuse');
+			theFuseSize = theFuse.length;
+			j = theFuseSize-1;
+			k = 0;
+			thePlay = setInterval(function() {
+				if (k >= theFuseSize) {
+					k = 0;
+				}
+				if (j >= theFuseSize) {
+					j = 0;
+				}
+				theFuse[k].style.transform = "scale(2)";
+				theFuse[j].style.transform = "scale(1)";
+				k++; j++;
+			}, 150);
+		}
+		function stopAnimationHaiDooNoy() {
+			clearInterval(thePlay);
+			theFuse[j].style.transform = "scale(1)";
 		}
 	</script>
 </body>
