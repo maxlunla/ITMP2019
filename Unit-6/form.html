@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <title>Webville Tunes</title>
+   <meta charset="utf-8">
+   <link rel="icon"
+   type="image/ico"
+   href="http://wickedlysmart.com/favicon.ico">
+   <!-- <script src="playlist.js"></script>
+   <script src="playlist_store.js"></script> -->
+   <!-- <link rel="stylesheet" href="playlist.css"> -->
+   <style type="text/css">
+   ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+</head>
+<body>
+  <form onsubmit="return register()">
+    <h2>ลงทะเบียนร่วมงาน</h2>
+    <input type="text" class="info" placeholder="รหัสนักศึกษา" required>
+    <input type="text" class="fname" placeholder="ชื่อ" required>
+    <input type="text" class="lname" placeholder="นามสกุล" required>
+    <button>ลงทะเบียน</button>
+  </form>
+  <br><hr><br>
+  <table>
+    <thead>
+      <th>ลำดับที่</th>
+      <th>รหัสนักศึกษา</th>
+      <th>ชื่อ</th>
+      <th>นามสกุล</th>
+    </thead>
+    <tbody id="registerList">
+      <tr></tr>
+    </tbody>
+  </table>
+
+  <script type="text/javascript">
+    var i = 1;
+    function register() {
+      people = document.createElement("tr");
+      people.innerHTML = `<td>${i}</td><td>${document.querySelector('.info').value}</td><td>${document.querySelector('.fname').value}</td><td>${document.querySelector('.lname').value}</td>`;
+      registerList.appendChild(people);
+      i++;
+      return false;
+    }
+       </script>
+</body>
+</html>
