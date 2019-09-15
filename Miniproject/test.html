@@ -38,14 +38,17 @@
 	#leftBox{
 		float: left;
 	}
+
 	#rightBox{
 		float: left;
 		clear:left;
 	}
+
 	.butt{
 		height:50px;
 		width: 107px;
 	}
+
 	#puzzel{
 		text-align: center;
 		margin: 0;
@@ -53,27 +56,30 @@
 		border-collapse: collapse;
 		border: 1px solid black;
 	}
+
 	#puzzel_colum {
 		width: 400px;
 
 	}
+
 	.inputBox{
 			width: 40px;
 			height:40px;
-			border: 1px solid black;
+			/*border: 1px solid black;*/
 			text-align: center;
 	}
+
 	#hintsTable{
+		border: 1px solid black;
 		width: 480px;
 		float: left;
 		clear: left;
-		text-indent: 
+		vertical-align: top; 
 	}
 </style>
 
 <body onload="initializeScreen()">
 	<center><h1>Amazing Crossword Game</h1></center>
-	<center>
 	<table>
 		<tr>
 			<td id="puzzel_colum"><div id="leftBox"><table id="puzzel"></table></div></td>
@@ -104,7 +110,7 @@
 			</div>
 		</tr>
 	</table>
-</center>
+
 <script>
 //Globals
 var currentTextInput;
@@ -143,21 +149,21 @@ function textInputFocus(txtID123){
 }
 //Returns Array
 function preparePuzzelArray(){
-var items = [	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+var items = [	['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
 			];
 return items;
 }
@@ -179,7 +185,7 @@ function checkClicked(){
 					selectedInputTextElement.style.backgroundColor = 'red';
 					
 				}else{
-					selectedInputTextElement.style.backgroundColor = 'white';
+					selectedInputTextElement.style.backgroundColor = 'green';
 				}
 			}
 		}
