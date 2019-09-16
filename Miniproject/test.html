@@ -7,7 +7,7 @@
 <style>
 	/*เปลี่ยนสี่พื้นหลังของเว็บ*/
 	body {
-		background-color: #4F8EDB;
+		background-color: #ffc0cb;
 	}
 
 	tr{
@@ -74,16 +74,21 @@
 
 	#hintsTable{
 		border: 1px solid black;
-		width: 480px;
+		width: 960px;
 		float: left;
 		clear: left;
 		vertical-align: top; 
+	}
+
+	.game_box {
+		margin-left: auto;
+		margin-right: auto;
 	}
 </style>
 
 <body onload="initializeScreen()">
 	<center><h1>Amazing Crossword Game</h1></center>
-	<table>
+	<table class="game_box">
 		<tr>
 			<td id="puzzel_colum"><div id="leftBox"><table id="puzzel"></table></div></td>
 			<td>
@@ -92,13 +97,20 @@
 						<td><strong>Horizontal:</strong></td><td><strong>Vertical:</strong></td>
 					</tr>
 					<tr>
-						<td>3. Cultural Hub (Hyderabad)</td><td>1. Education Hub (Pune)</td>
+						<td>1. Twelve o&#39;clock at night</td><td>2. The belief in freedom and equality between people</td>
 					</tr>
 					<tr>
-						<td>5. India's financial capital (Mumbai)</td><td>2. Information Technology Hub (Bangalore)</td>
+						<td>3. An action or event that is considered immoral</td><td>4. A thing that a person or group does or has done</td>
 					</tr>
 					<tr>
-						<td>6. Saffron region (Kashmir)</td><td>4. Capital of India (Delhi)</td>
+						<td>5. The quality of being kind to people</td><td>6. Unity of feeling or action among individuals with a common interest</td>
+					</tr>
+					<tr>
+						<td>7. A musical play in which most of the words are sung</td><td>8. An order especially one given by a soldier</td>
+					</tr>
+					<tr>
+						<td>9. The special chair used by a ruler especially a king or queen</td><td>10. A strong pattern of sounds, words, or musical notes that is used in music</td>
+					</tr>
 				</table>
 			</td>
 		</tr>
@@ -107,7 +119,6 @@
 				<table>
 					<tr><td><input class="butt"  type="submit" value="Clear All" onclick="clearAllClicked()"></td>
 					<td><input class="butt"  type="submit" value="Check" onclick="checkClicked()"></td>
-					<td><input class="butt"  type="submit" value="Solve" onclick="solveClicked()"></td>
 					<td><input class="butt"  type="submit" value="Clue" onclick="clueClicked()"></td></tr>
 				</table>
 			</div>
@@ -139,12 +150,16 @@ function initializeScreen(){
 }
 //Adds the hint numbers
 function addHint(){
-	document.getElementById("txt_0_4").placeholder = "1";
-	document.getElementById("txt_2_6").placeholder = "2";
-	document.getElementById("txt_3_1").placeholder = "3";
-	document.getElementById("txt_3_9").placeholder = "4";
-	document.getElementById("txt_6_2").placeholder = "5";
-	document.getElementById("txt_9_0").placeholder = "6";
+	document.getElementById("txt_0_1").placeholder = "2";
+	document.getElementById("txt_7_3").placeholder = "4";
+	document.getElementById("txt_4_5").placeholder = "6";
+	document.getElementById("txt_7_9").placeholder = "8";
+	document.getElementById("txt_8_12").placeholder = "10";
+	document.getElementById("txt_2_1").placeholder = "1";
+	document.getElementById("txt_4_5").placeholder = "3";
+	document.getElementById("txt_7_1").placeholder = "5";
+	document.getElementById("txt_8_9").placeholder = "7";
+	document.getElementById("txt_12_5").placeholder = "9";
 }
 //Stores ID of the selected cell into currentTextInput
 function textInputFocus(txtID123){
@@ -152,21 +167,21 @@ function textInputFocus(txtID123){
 }
 //Returns Array
 function preparePuzzelArray(){
-var items = [	['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
-				['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+var items = [	[0, 'd',   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+				[0, 'e',   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+				[0, 'm', 'i', 'd', 'n', 'i', 'g', 'h', 't',   0,   0,   0,   0,   0,   0],
+				[0, 'o',   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+				[0, 'c',   0,   0,   0, 's', 'c', 'a', 'n', 'd', 'a', 'l',   0,   0,   0],
+				[0, 'r',   0,   0,   0, 'o',   0,   0,   0,   0,   0,   0,   0,   0,   0],
+				[0, 'a',   0,   0,   0, 'l',   0,   0,   0,   0,   0,   0,   0,   0,   0],
+				[0, 'c', 'h', 'a', 'r', 'i', 't', 'y',   0, 'c',   0,   0,   0,   0,   0],
+				[0, 'y',   0, 'c',   0, 'd',   0,   0,   0, 'o', 'p', 'e', 'r', 'a',   0],
+				[0,   0,   0, 't',   0, 'a',   0,   0,   0, 'm',   0,   0, 'h',   0,   0],
+				[0,   0,   0, 'i',   0, 'r',   0,   0,   0, 'm',   0,   0, 'y',   0,   0],
+				[0,   0,   0, 'v',   0, 'i',   0,   0,   0, 'a',   0,   0, 't',   0,   0],
+				[0,   0,   0, 'i',   0, 't', 'h', 'r', 'o', 'n', 'e',   0, 'h',   0,   0],
+				[0,   0,   0, 't',   0, 'y',   0,   0,   0, 'd',   0,   0, 'm',   0,   0],
+				[0,   0,   0, 'y',   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
 			];
 return items;
 }
@@ -203,43 +218,6 @@ function clueClicked(){
 		var column = token[2];
 		document.getElementById(temp1).value = puzzelArrayData[row][column];
 		//checkClicked();
-	}
-}
-//Solve Button
-function solveClicked(){
-	if (currentTextInput != null){
-		var temp1 = currentTextInput;
-		var token = temp1.split("_");
-		var row = token[1];
-		var column = token[2];
-		
-		// Print elements on top
-		for(j = row; j >= 0; j--){
-			if(puzzelArrayData[j][column] != 0){
-				document.getElementById('txt' + '_' + j + '_' + column).value = puzzelArrayData[j][column];
-				}else break;
-		}
-		// Print elements on right
-		for(i = column; i< puzzelArrayData[row].length; i++){
-			if(puzzelArrayData[row][i] != 0){
-				document.getElementById('txt' + '_' + row + '_' + i).value = puzzelArrayData[row][i];
-				}else break;
-		}
-		
-		// Print elements below
-		for(m = row; m< puzzelArrayData.length; m++){
-			if(puzzelArrayData[m][column] != 0){
-				document.getElementById('txt' + '_' + m + '_' + column).value = puzzelArrayData[m][column];
-				}else break;
-		}
-		// Print elements on left
-		for(k = column; k >= 0; k--){
-			if(puzzelArrayData[row][k] != 0){
-				document.getElementById('txt' + '_' + row + '_' + k).value = puzzelArrayData[row][k];
-				}else break;
-		}
-		// Done!
-		
 	}
 }
 </script>
