@@ -3,14 +3,17 @@
 <head>
 	<title>Crossword Hanza</title>
 	<link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css\snowflake.css">
 </head>
 
 <style>
 	/*เปลี่ยนสี่พื้นหลังของเว็บ*/
 	body {
-		background-color: #21b6a8;
+		background-color: #330066;
 		font-family: 'Manjari', sans-serif;
+		color: white;
 		-webkit-user-select: none;
+		z-index: 100 !important; 
 	}
 	/*กำหนดให้หัวข้อของตาราง hints อยู่ตรงกลาง*/
 	#head_width {
@@ -29,41 +32,63 @@
 		margin: 0;
 		padding: 0;
 		border-collapse: collapse;
-		border: 1px solid black;
+		border: 0.25vw solid black;
 	}
 	/*กำหนดขนาดของช่องใส่ตัวอักษร*/
 	.inputBox{
-			width: 34px;
-			height: 34px;
-			/*border: 1px solid black;*/
-			text-align: center;
+		width: 2.5vw;
+		height: 2.25vw;
+		/*border: 1px solid black;*/
+		text-align: center;
 	}
 	/*เลื่อนตารางออกไปทางขวา และให้ตารางชิดบนขอบ*/
 	#hint_col {
-		padding-left: 15px;
+		padding-left: 3.5vw;
 		vertical-align: top;
 	}
 	/*กำหนดเส้นขอบ ความกว้างของตาราง และจัดตัวอักษร*/
 	#hintsTable{
-		border: 1px solid black;
+		border: 0.15vw solid white;
+		border-radius: 15px;
 		width: 50vw;
 		float: left;
 		clear: left;
-		vertical-align: top; 
+		vertical-align: top;
+		background-color: rgba(0,0,0,0.5);
 	}
 	/*กำหนดความกว้างของตารางที่เก็บปุ่มให้เท่ากับตารางของคำใบ้*/
 	#button_col {
-		padding-top: 10px;
+		padding-top: 1.5vw;
 		width: 50vw;
 	}
 	/*ขยับปุ่มให้อยู่ตรงกลางของตาราง*/
 	#button_space {
 		padding-left: 4.25vw;
 	}
-	/*กำหนดขนาดของปุ่มกดทั้ง 4 ปุ่ม*/
+	/*กำหนดขนาดของปุ่มกดทั้ง 3 ปุ่ม*/
 	.butt{
-		height: 50px;
-		width: 107px;
+		height: 2.5vw;
+		width: 7.5vw;
+		background-color: #330033;
+  		border: none;
+  		color: white;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		cursor: pointer;
+  		border-radius: 10vw;
+	}
+	/*กำหนดขนาดของรูปใน Footer */
+	.footer {
+    	height: 126%;
+    	width: 100%;
+	}
+	footer {
+		clear: both;
+    	position: relative;
+    	height: 200px;
+    	margin-top: -200px;
+    	z-index: -100;
 	}
 </style>
 
@@ -113,7 +138,73 @@
 			</td>
 		</tr>
 	</table>
+	<!-- ทำเกล็ดหิมะตกลงมา -->
+	<div class="snowflakes" aria-hidden="true">
+  		<div class="snowflake">
+  			❅
+  		</div>
+		<div class="snowflake">
+		 	❆
+		</div>
+		<div class="snowflake">
+		  	❅
+		</div>
+		<div class="snowflake">
+		  	❆
+		</div>
+		<div class="snowflake">
+		  	❅
+		</div>
+		<div class="snowflake">
+		 	❆
+		</div>
+		<div class="snowflake">
+		    ❅
+		</div>
+		<div class="snowflake">
+		    ❆
+		</div>
+		<div class="snowflake">
+		    ❅
+		</div>
+		<div class="snowflake">
+		    ❆
+		</div>
+		<div class="snowflake">
+		    ❅
+		</div>
+		<div class="snowflake">
+		    ❆
+		</div>
+	</div>
+	<!-- ใส่ Footer ของเว็บ -->
+	<footer>
+		<img class="footer" src="resource/footer.png">
+	</footer>
+	<!-- เพลงพื้นหลัง -->
+	<iframe src="resource/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+	<audio id="player" autoplay loop>
+    	<source src="resource/BGM.mp3" type="audio/mp3">
+	</audio>
 <script>
+	//จำกัดการเข้าถึง Inspect Element
+	document.onkeydown = function(e) {
+	  	if(event.keyCode == 123) {
+	    	return false;
+	  	}
+	  	if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+	    	return false;
+	  	}
+	  	if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+	     	return false;
+	  	}
+	  	if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+	     	return false;
+	  	}
+	  	if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+	     	return false;
+	  	}
+	}
 	//ตัวแปร Globals
 	var currentTextInput;
 	var puzzleArrayData;
