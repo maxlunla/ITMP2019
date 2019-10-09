@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Litthe Wizard</title>
+	<meta charset=utf-8>
+	<meta name=description content="">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+
+	<style type="text/css">
+	body{
+		margin:0;
+		font-family: sans-serif;
+		font-family: 'Itim', cursive, sans-serif;
+		background: white;
+	}
+	#wrap{
+		background-image: url('game_bg.jpg');
+		width: 100%;
+		height: 90vh;
+		position: relative;
+	}
+	#start-div{
+		height: 100%;
+		width: 100%;
+	}
+	#start{
+		position: absolute;
+		width: 20vw;
+		height: 8vw;
+		background: #260047;
+		color: #C7D3D4FF;
+		font-size: 3em;
+		margin-top: 20vw;
+    	margin-left: 40vw;
+		font-family: 'Itim', cursive, sans-serif;
+	}
+	#restart{
+		position: absolute;
+		display: block;
+		width: 20%;
+		height: 80px;
+		background: #260047;
+		color: #603F83FF;
+		font-size: 25px;
+		outline: none;
+		margin-top: 10%;
+		margin-left: 40%;
+		display: none;	
+		font-family: 'Itim', cursive, sans-serif;
+	}	
+	#control{
+		background: hsl(300,100%,70%);
+		width: 100%;
+		height: 10vh;
+		/*padding: 10px;*/
+		box-sizing: border-box;
+		display: flex;
+	}
+	.cmd{
+		height: 100%;
+		width: 50%;
+		font-size: 3em;
+		color: #C7D3D4FF;
+	}
+	button {
+    border: solid 2px;
+    background-color: #260047;
+    color: white;
+    border-color: #603F83FF;    
+    }
+	.fruit{
+		height: 20%;
+		width: 20%;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		transition: all .1s;
+	}
+	.f0{
+		background-image: url('f0.png');
+	}
+	.f1{
+		background-image: url('f1.png');
+	}
+	.f2{
+		background-image: url('f2.png');
+	}
+	.f3{
+		background-image: url('f3.png');
+	}
+	.f4{
+		background-image: url('f4.png');
+	}
+	.f5{
+		background-image: url('f5.png');
+	}
+	.f6{
+		background-image: url('f6.png');
+	}
+	.f7{
+		background-image: url('f7.png');
+	}
+	.f8{
+		background-image: url('f8.png');
+	}
+	.f9{
+		background-image: url('f9.png');
+	}
+	.f10{
+		background-image: url('f10.png');
+	}
+	#char{
+		background-image: url('char.png');
+		height: 20%;
+		width: 20%;
+		background-size: contain;
+		background-position: center bottom;
+		background-repeat: no-repeat;
+		position: absolute;
+		transition: all .1s;
+		display: none;
+	}
+	#heart-1{
+		background-image: url('spellbook.png');
+		position: absolute;
+		height: 8%;
+		width: 8%;
+		background-size: contain;
+		background-repeat: no-repeat;
+		left: 80%;
+		top:0%
+	}
+	#heart-2{
+		background-image: url('spellbook.png');
+		position: absolute;
+		height: 8%;
+		width: 8%;
+		background-size: contain;
+		background-repeat: no-repeat;
+		left: 85%;
+		top:0%
+	}
+	#heart-3{
+		background-image: url('spellbook.png');
+		position: absolute;
+		height: 8%;
+		width: 8%;
+		background-size: contain;
+		background-repeat: no-repeat;
+		left: 90%;
+		top:0%
+	}
+	h1{
+		font-size: 2.1em;
+		margin-top: 0%;
+		color: #C7D3D4FF;
+		background-color: rgba(38,0,71,0.5);
+	}
+	#score-div{
+		font-size: 2.1em;
+		margin-top: 0%;
+		color: white;
+	}
+	[x="0"]{left:0%;}
+	[x="1"]{left:20%;}
+	[x="2"]{left:40%;}
+	[x="3"]{left:60%;}
+	[x="4"]{left:80%;}
+	[y="-1"]{top:-20%;}
+	[y="0"]{top:0%;}
+	[y="1"]{top:20%;}
+	[y="2"]{top:40%;}
+	[y="3"]{top:60%;}
+	[y="4"]{top:80%;}
+</style>
+</head>
+<body>	
+	<div id="wrap">
+		<div id="start-div">
+			<button id="start" onclick="gameStart()">Play</button>
+			<button id="restart" onclick="restart()">Restart</button>
+			<div id="score-div"><h1 align="center" id="score">Collect Magic Power</h1></div>
+		</div> 
+		<div id="char" x="2" y="4"></div>
+	</div>
+		<div id="spellbook-1"></div>
+		<div id="spellbook-2"></div>
+		<div id="spellbook-3"></div>
+		
+	<div id="control">
+		<button class="cmd" onclick="moveChar(-1)"><</button>
+		<button class="cmd" onclick="moveChar(+1)">></button>
+	</div>
+
+	<script>
+		nowID = 0;
+		count = 3;
+		point = 0;
+		
+		function gameStart(){
+			document.getElementById('start').style.display = 'none';
+			document.getElementById('char').style.display = 'block';
+			letplay = setInterval(function(){
+				newFruit();
+			},1000)
+			skyfall = setInterval(function(){
+				fallingSlowly();
+			},1000)
+		}
+		function newFruit(){
+			let f = document.createElement("div");
+			f.setAttribute("x", rand(5));
+			f.setAttribute("y", -1);
+			f.setAttribute("class","fruit f"+rand(11));
+			f.setAttribute("id","fruit_"+nowID);
+			wrap.appendChild(f);
+			nowID++;
+		}
+		function fallingSlowly(){
+			let f = document.querySelectorAll(".fruit");
+			for (var i = 0; i < f.length; i++) {
+				let nowY = f[i].getAttribute("y");
+				nowY = parseInt(nowY);
+				f[i].setAttribute("y",nowY+1);
+				if (nowY == 4) {
+					f[i].outerHTML = "";
+				}
+			}
+			checker();
+		}
+		function checker(){
+			let nowCX = char.getAttribute("x");
+			nowCX = parseInt(nowCX);
+			let nowCY = char.getAttribute("y");
+			nowCY = parseInt(nowCY);
+			let f0 = document.querySelectorAll(".f7");
+			let f1 = document.querySelectorAll(".f8");
+			let f9 = document.querySelectorAll(".f9");
+			let f10 = document.querySelectorAll(".f10");
+			for (var i = 0; i < f0.length; i++) {
+				let nowFX = f[i].getAttribute("x");
+				nowFX = parseInt(nowFX);
+				let nowFY = f[i].getAttribute("y");
+				nowFY = parseInt(nowFY);
+				if (nowCX == nowFX && nowCY == nowFY) {
+					if (count == 1) {
+						document.getElementById('heart-'+count).style.display = 'none';
+						count -= 1;
+						gameStop();
+					}else{
+						document.getElementById('heart-'+count).style.display = 'none';	
+						count -=1;
+						f0
+					}
+				}
+			}
+			let f2 = document.querySelectorAll(".f0");
+			for (var i = 0; i < f2.length; i++) {
+				let nowFX2 = f2[i].getAttribute("x");
+				nowFX2 = parseInt(nowFX2);
+				let nowFY2 = f2[i].getAttribute("y");
+				nowFY2 = parseInt(nowFY2);
+				if (nowCX == nowFX2 && nowCY == nowFY2) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f3 = document.querySelectorAll(".f1");
+			for (var i = 0; i < f3.length; i++) {
+				let nowFX3 = f3[i].getAttribute("x");
+				nowFX3 = parseInt(nowFX3);
+				let nowFY3 = f3[i].getAttribute("y");
+				nowFY3 = parseInt(nowFY3);
+				if (nowCX == nowFX3 && nowCY == nowFY3) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f4 = document.querySelectorAll(".f2");
+			for (var i = 0; i < f4.length; i++) {
+				let nowFX4 = f4[i].getAttribute("x");
+				nowFX4 = parseInt(nowFX4);
+				let nowFY4 = f4[i].getAttribute("y");
+				nowFY4 = parseInt(nowFY4);
+				if (nowCX == nowFX4 && nowCY == nowFY4) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f5 = document.querySelectorAll(".f3");
+			for (var i = 0; i < f5.length; i++) {
+				let nowFX5 = f5[i].getAttribute("x");
+				nowFX5 = parseInt(nowFX5);
+				let nowFY5 = f5[i].getAttribute("y");
+				nowFY5 = parseInt(nowFY5);
+				if (nowCX == nowFX5 && nowCY == nowFY5) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f6 = document.querySelectorAll(".f4");
+			for (var i = 0; i < f6.length; i++) {
+				let nowFX6 = f6[i].getAttribute("x");
+				nowFX6 = parseInt(nowFX6);
+				let nowFY6 = f6[i].getAttribute("y");
+				nowFY6 = parseInt(nowFY6);
+				if (nowCX == nowFX6 && nowCY == nowFY6) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f7 = document.querySelectorAll(".f5");
+			for (var i = 0; i < f7.length; i++) {
+				let nowFX7 = f7[i].getAttribute("x");
+				nowFX7 = parseInt(nowFX7);
+				let nowFY7 = f7[i].getAttribute("y");
+				nowFY7 = parseInt(nowFY7);
+				if (nowCX == nowFX7 && nowCY == nowFY7) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+			f8 = document.querySelectorAll(".f6");
+			for (var i = 0; i < f8.length; i++) {
+				let nowFX8 = f8[i].getAttribute("x");
+				nowFX8 = parseInt(nowFX8);
+				let nowFY8 = f8[i].getAttribute("y");
+				nowFY8 = parseInt(nowFY8);
+				if (nowCX == nowFX8 && nowCY == nowFY8) {
+					point += 10;
+					document.getElementById("score-div").innerText = "Score: "+point;
+				}
+			}
+		}
+		function moveChar(step){
+			let nowX = char.getAttribute("x");
+			nowX = parseInt(nowX);
+			if (step == 1 && nowX == 4) {
+				step = 0
+			}
+			if (step == -1 && nowX == 0) {
+				step = 0
+			}
+			char.setAttribute("x",nowX+step);
+		}
+		function rand(max) {
+			return Math.floor(Math.random() * Math.floor(max));
+		}
+		function gameStop() {
+			clearInterval(letplay);
+			clearInterval(skyfall);
+			deleteEverything();
+			document.getElementById('restart').style.display = 'block';			
+		}
+		function deleteEverything(){
+			let f = document.querySelectorAll(".fruit");
+			for (var i = 0; i < f.length; i++) {
+				wrap.removeChild(f[i]);
+				document.getElementById('char').style.display = 'none';
+			}
+		}
+		function restart(){
+			window.location.reload(true);
+		}
+	</script> 
+</body>
+</html>
