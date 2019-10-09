@@ -8,22 +8,26 @@
 	body,.ffont, .title.ffont, h1, h2, h3, h4 {
 		font-family: 'Roboto Condensed', sans-serif !important;
 	}
+	#homeContent {
+		font-size: 5em;
+	}
 	.bar .label{
-		width: 100px;
+		width: 10vw;
 		display: inline-block;
+		color: yellow;
 	}
 	.bar .chart{
-		width: 10px;
-		background: red;
+		width: 1vw;
+		background: #f65058ff;
 		height: 1em;
 		display: inline-block;
 		transition: all 3s;
 	}
 	.bar .chart.close{
-		width: 10px !important;
+		width: 1vw !important;
 	}
 	#topLine{
-		height: 2px;
+		height: 0.2vw;
 		background: deeppink;
 		width: 10%;
 		position: fixed;
@@ -32,46 +36,95 @@
 	}
 	#paragraph{
 		transform: scale(1);
-		transition: all 3s;
+		transition: all .3s;
 	}
 	#paragraph.small{
 		transform: scale(0.2);
 	}
+	.parent{
+		height: 100vh;
+	}
+	.learningColor {
+		color: yellow;
+	}
+	#chartContent {
+		background-color: #28334aff !important;
+	}
+	#sailorBlue {
+		background-color: #00203FFF !important;
+		color: #adefd1ff; 
+	}
+	#loremContent {
+		background-color: #195190ff !important;
+		color: #a2a2a1ff;
+	}
+	#navyBlue {
+		background-color: #333d79ff !important;
+		color: #faebefff;
+	}
 </style>
 </head>
 <body>
-	<div class="fullscreen bg-smoke padding-l v-middle-flex">
+	<div id="sailorBlue" class="parent bg-smoke padding-l v-middle-flex">
 		<div class="to-center">
-			<h1>Welcome</h1>
-			<p>Please scroll down</p>
+			<h1 id="homeContent">WELCOME</h1>
+			<p>Scroll down to see my learning chart</p>
 		</div>
 	</div>
-	<div class="fullscreen bg-white padding-l v-middle-flex">
+	<div id = "chartContent" class="parent bg-black padding-l v-middle-flex">
 		<div class="to-center">
-			<h1>My Learning</h1>
+			<h1 class="learningColor">My Learning</h1>
 			<sp class="xl"></sp>
 			<div class="t-left">
 				<div class="bar">
-					<div class="label">Thai</div>
-					<div class="chart close" style="width: 180px"></div>
+					<div class="label">Biology</div>
+					<div class="chart close" style="width: 20vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Technology</div>
+					<div class="chart close" style="width: 18.7vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Chemistry</div>
+					<div class="chart close" style="width: 18vw"></div>
 				</div>
 				<div class="bar">
 					<div class="label">English</div>
-					<div class="chart close" style="width: 200px"></div>
+					<div class="chart close" style="width: 17.5vw"></div>
 				</div>
 				<div class="bar">
-					<div class="label">Sciene</div>
-					<div class="chart close" style="width: 20px"></div>
+					<div class="label">Thai</div>
+					<div class="chart close" style="width: 17vw"></div>
 				</div>
 				<div class="bar">
-					<div class="label">Math</div>
-					<div class="chart close" style="width: 40px"></div>
+					<div class="label">PE</div>
+					<div class="chart close" style="width: 16vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Physics</div>
+					<div class="chart close" style="width: 15vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">History</div>
+					<div class="chart close" style="width: 13.7vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Social Study</div>
+					<div class="chart close" style="width: 12.5vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Mathematics</div>
+					<div class="chart close" style="width: 10vw"></div>
+				</div>
+				<div class="bar">
+					<div class="label">Art&Music</div>
+					<div class="chart close" style="width: 4.5vw"></div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-	<div class="fullscreen bg-smoke padding-l v-middle-flex">
+	<div id = "loremContent" class="parent bg-smoke padding-l v-middle-flex">
 		<div class="to-center">
 			<h1>I'm Genius, right?</h1>
 			<sp class="xl"></sp>
@@ -85,8 +138,83 @@
 			</p>
 		</div>
 	</div>
+	<div id="navyBlue" class="parent bg-white padding-l v-middle-flex">
+	</div>
 	<div id="topLine">
 		
 	</div>
+
+	<script type="text/javascript">
+		window.addEventListener("scroll", lineRender);
+		window.addEventListener("scroll", animationPart);
+		function lineRender() {
+			maxHeight = document.body.getBoundingClientRect().height - window.innerHeight;
+			scrollPoint = window.pageYOffset;
+			lineWidth = Math.ceil((scrollPoint * 100) / maxHeight)
+			topLine.style.width = `${lineWidth}%`
+		}
+		function animationPart() {
+			checkPoint = window.pageYOffset + (window.innerHeight / 2);
+			if (checkPoint >= chartContent.offsetTop && checkPoint < (chartContent.offsetTop + chartContent.getBoundingClientRect().height)) {
+				chartAnimation(true);
+			} else {
+				chartAnimation(false);
+			}
+			if (checkPoint >= loremContent.offsetTop && checkPoint < (loremContent.offsetTop + loremContent.getBoundingClientRect().height)) {
+				scalingAnimation(true);
+			} else {
+				scalingAnimation(false);
+			}
+		}
+		function chartAnimation(x) {
+			chart = document.getElementsByClassName('chart');
+			if (x) {
+				for (let i = 0; i < chart.length; i++) {
+					chart[i].classList.remove('close')
+				}
+			} else {
+				for (let i = 0; i < chart.length; i++) {
+					chart[i].classList.add('close')
+				}
+			}
+		}
+		function scalingAnimation(x) {
+			if (x) {
+				paragraph.style.transform = `scale(1)`;
+			} else {
+				paragraph.style.transform = `scale(0.2)`;
+			}
+		}
+
+		// let bodyR = document.body.getBoundingClientRect();
+		// let bodyH = window.innerHeight;
+		// let y = window.pageYOffset;
+		// let yBottom = window.pageYOffset+window.innerHeight;
+		// function onScroll(){
+		// 	bodyR = document.body.getBoundingClientRect();
+		// 	y = window.pageYOffset;
+		// 	yBottom = window.pageYOffset+window.innerHeight;
+		// 	console.log(bodyR);
+		// }
+		// window.addEventListener("scroll", onScroll);
+
+		// function ppp(){
+		// 	let ppR = paragraph.getBoundingClientRect();
+		// 	console.log(ppR);
+		// 	console.log(ppR.top-bodyH > -100 );
+		// 	console.log(ppR.top-bodyH < 0)
+		// 	// ppR.top คือระยะห่างของพารากราฟขณะนั้นกับขอบบนเบราเซอร์ 
+		// 	// หาก top = 0 คืออีลีเมนท์อยู่ชิดขอบบน
+		// 	// หาก top = ความสูงหน้าจอหรือ window.innerHeight แปลว่าอีลีเมนท์นั้นกำลังโผล่มา
+		// 	if (ppR.top < window.innerHeight && ppR.bottom > 0) {
+		// 		paragraph.classList.remove('small')
+		// 	}
+		// 	else {
+		// 		paragraph.classList.add('small')
+		// 	}
+		// }
+		// window.addEventListener("scroll", ppp);
+	</script>
 </body>
+
 </html>
