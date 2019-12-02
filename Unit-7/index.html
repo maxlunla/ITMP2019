@@ -2,6 +2,9 @@
 <html>
 <head>
 	<style>
+		.body {
+			margin: 0px;
+		}
 		.yoyo {
 			width: 100px;
 			height: 100px;
@@ -10,42 +13,50 @@
 			bottom: 1.5em;
 			background: red;
 			border: solid black 4px;
+			z-index: 999;
+			border-radius: 100%;
 		}
 		.yoyo2 {
 			width: 86px;
 			height: 86px;
 			position: fixed;
 			background: orange;
+			border-radius: 100%;
 		}
 		.yoyo3 {
 			width: 74px;
 			height: 74px;
 			position: fixed;
 			background: yellow;
+			border-radius: 100%;
 		}
 		.yoyo4 {
 			width: 60px;
 			height: 60px;
 			position: fixed;
 			background: green;
+			border-radius: 100%;
 		}
 		.yoyo5 {
 			width: 46px;
 			height: 46px;
 			position: fixed;
 			background: blue;
+			border-radius: 100%;
 		}
 		.yoyo6 {
 			width: 32px;
 			height: 32px;
 			position: fixed;
 			background: purple;
+			border-radius: 100%;
 		}
 		.yoyo7 {
 			width: 18px;
 			height: 18px;
 			position: fixed;
 			background: cyan;
+			border-radius: 100%;
 		}
 
 	@keyframes blink{
@@ -57,8 +68,9 @@
 		animation: blink .2s infinite;
 	}
 	#tooPla{
-		height: 600px;
-		background: #0b504f;
+		height: 6000px;
+		/*background: #0b504f;*/
+		background-image: linear-gradient(to bottom, rgb(195, 227, 255), rgb(3, 50, 74));
 		position: relative;
 		overflow: hidden;
 	}
@@ -68,24 +80,29 @@
 		transition: all .2s
 	}
 	.f1{
-		top: 450px;
-		left: 5vw;
+		top: 675px;
+		left: 80px;
 	}
 	.f2{
-		top: 700px;
-		left: 19vw;
+		top: 1250px;
+		left: 480px;
 	}
 	.f3{
-		top: 540px;
-		left: 26vw;
+		top: 2650px;
+		left: 1200px;
 	}
 	.f4{
-		top: 580px;
-		left: 34vw;
+		top: 4050px;
+		left: 1100px;
 	}
 	.f5{
-		top: 400px;
-		left: 58vw;
+		top: 7120px;
+		left: 680px;
+	}
+	.footer {
+		top: 92%;
+		width: 100%;
+		position: relative;
 	}
 
 	</style>
@@ -102,28 +119,14 @@
 		<div id="yoyo6" class="yoyo6"></div>
 		<div id="yoyo7" class="yoyo7"></div>
 	</div>
-		<div id="d1" style="height: 400px; width: 100%; background-color: #95d8eb"></div>
-		<div id="d2" style="height: 400px; width: 100%; background-color: #95d8eb"></div>
-		<div id="d3" style="height: 400px; width: 100%; background-color: #4db4d7"></div>
-		<div id="d4" style="height: 400px; width: 100%; background-color: #4db4d7"></div>
-		<div id="d5" style="height: 400px; width: 100%; background-color: #0076be"></div>
-		<div id="d6" style="height: 400px; width: 100%; background-color: #0076be"></div>
-		<div id="d7" style="height: 400px; width: 100%; background-color: #0076be"></div>
-		<div id="d8" style="height: 400px; width: 100%; background-color: #0076be"></div>
-		<div id="d9" style="height: 400px; width: 100%; background-color: #8bd9c7"></div>
-		<div id="d10" style="height: 400px; width: 100%; background-color: #8bd9c7"></div>
-		<div id="d11" style="height: 400px; width: 100%; background-color: #8bd9c7"></div>
-		<div id="d12" style="height: 400px; width: 100%; background-color: #8bd9c7"></div>
-		<div id="d13" style="height: 400px; width: 100%; background-color: #48bf91"></div>
-		<div id="d14" style="height: 400px; width: 100%; background-color: #48bf91"></div>
-		<div id="d15" style="height: 400px; width: 100%; background-color: #48bf91"></div>
-			<div id="tooPla">
+
+		<div id="tooPla">
 				<img src="fish1.png" class="fish f1" id="f1">
 				<img src="fish1.png" class="fish f2" id="f2">
 				<img src="fish1.png" class="fish f3" id="f3">
 				<img src="fish1.png" class="fish f4" id="f4">
 				<img src="fish1.png" class="fish f5" id="f5">
-		<div id="d16" style="height: 400px; width: 100%; background-color: #0b504f"></div>
+		</div>
 
 		<script>
 			function rotateYoyo() {
@@ -132,22 +135,9 @@
 			}
 			window.addEventListener("scroll", rotateYoyo);
 
-		function blinkThat(){
-			let ey = d3.offsetTop;
-			let ebottom = ey+d3.offsetHeight; 
-			let nowTop = window.pageYOffset;
-			let nowBottom = nowTop+window.innerHeight;
-			if (nowBottom>ey+300 && nowTop<ebottom-100) {
-				d3.classList.add('blink');
-			}
-			else{
-				d3.classList.remove('blink');
-			}
-		}
-		window.addEventListener("scroll", blinkThat);
 
 		function plaToo(){
-			let y = window.pageYOffset-tooPla.offsetTop+tooPla.offsetHeight;
+			let y = window.pageYOffset-tooPla.offsetTop;
 			console.log(y);
 			f1.style.marginTop = `-${y}px`;
 			f2.style.marginTop = `-${y*3}px`;
